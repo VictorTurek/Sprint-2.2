@@ -17,8 +17,8 @@
 		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-		<!-- Styles-->
-	<link rel="stylesheet" href="../starter-code-frontend-shop/css/styles.css" />
+	<!-- Styles-->
+	<link rel="stylesheet" href="css/styles.css" />
 
 </head>
 
@@ -249,38 +249,27 @@
 				</div>
 				<div class="modal-body">
 					<h3 class="text-center bill px-5">Shopping Cart</h3>
-					<table class="table">
+					<table class="table" id="ShoppingCartTable">
 						<thead>
 							<tr>
 								<th scope="col">Product</th>
 								<th scope="col">Price</th>
 								<th scope="col">Qty.</th>
-								<th scope="col">Total <small>(with discount)</small></th>
+								<th scope="col">Total</th>
 							</tr>
 						</thead>
-						<tbody id="cart_list">
-							<tr>
-								<th scope="row">Cooking oil</th>
-								<td>$10.5</td>
-								<td>2</td>
-								<td>$21</td>
-							</tr>
-							<tr>
-								<th scope="row">Pasta</th>
-								<td>$6.25</td>
-								<td>1</td>
-								<td>$6.25</td>
-							</tr>
-							<tr>
-								<th scope="row">Lawn dress</th>
-								<td>$15</td>
-								<td>3</td>
-								<td>$45</td>
-							</tr>
+						<tbody>
+							<!-- Las filas se añadirán aquí -->
 						</tbody>
 					</table>
+					<div class="text-center fs-5">
+						Total: $<span id="total_price"><!-- Precio Total --></span>
+					</div>
+					<div class="text-center fs-5">
+						Descuento: $<span id="total_discount"><!-- Descuento Total --></span>
+					</div>
 					<div class="text-center fs-3">
-						Total: $<span id="total_price">100</span>
+						Precio Final: $<span id="final_price"><!-- Precio Final --></span>
 					</div>
 					<div class="text-center">
 						<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>

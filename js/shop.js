@@ -98,10 +98,9 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
     cart = [];
     console.log(cart)
-
+    printCart() 
 }
 
 // Exercise 3
@@ -120,45 +119,67 @@ function calculateTotal() {
 // Exercise 4
 
 function applyPromotionsCart(totalPrice) {
-    let descuentoAceite = 0;
-    let descuentoCake = 0;
+    let promoDiscounts = 0;
     let subtotalWithDiscount = 0;
+    var IndexPromoProducts = [];
 
+    IndexPromoProducts = cart.reduce((acumulador, producto, indice) => {
+        if (producto.offer) {
+            acumulador.push(indice);
+        }
+        return acumulador;
+    }, []);
 
-
-    let oilIndex = cart.findIndex(product => product.id === 1);
-    let cakeIndex = cart.findIndex(product => product.id === 3);
-    // console.log(oilIndex);
-    // console.log(cakeIndex);
-
-
-    if (oilIndex >= 0) { //si el carrito contiene aceite
-        if (cart[oilIndex].amount >= 3) {
-            descuentoAceite = products[0].price * cart[oilIndex].amount * 0.2;
+    for (let i = 0; i < IndexPromoProducts.length; i++) {
+        if (cart[IndexPromoProducts[i]].amount >= cart[IndexPromoProducts[i]].offer.number) {
+            promoDiscounts = cart[IndexPromoProducts[i]].price * cart[IndexPromoProducts[i]].amount * (cart[IndexPromoProducts[i]].offer.percent / 100);
         }
     }
-    console.log("Descuento Acumulado en Aceite: ", descuentoAceite);
 
-    if (cakeIndex >= 0) { //si el carrito contiene mix de pasteles
-        if (cart[cakeIndex].amount >= 10) {
-            descuentoCake = products[2].price * cart[cakeIndex].amount * 0.3;
-        }
-    }
-    //console.log("Descuento Acumulado en Cake: ", descuentoCake);
-
-    subtotalWithDiscount = totalPrice - descuentoAceite - descuentoCake;
+    subtotalWithDiscount = totalPrice - promoDiscounts;
     let roundedPrice = subtotalWithDiscount.toFixed(2);
-   
-    //console.log("Discounted Price", roundedPrice)
-    
-    return subtotalWithDiscount;
+    console.log("Discounted Price", roundedPrice)
 
+    return promoDiscounts;
 }
 // Apply promotions to each item in the array "cart"
 
 
 // Exercise 5
 function printCart() {
+    
+    var table = document.getElementById("ShoppingCartTable");
+    var tbody = table.getElementsByTagName('tbody')[0];
+
+    tbody.innerHTML = ''; //limpiamos filas existentes ara evitar duplicados.
+    
+    for (let i = 0; i < cart.length; i++) {
+        var fila = tbody.insertRow();
+        var celdaName = fila.insertCell();
+        var insertPrice = fila.insertCell(1);
+        var insertAmount = fila.insertCell(2);
+        var insertTotalPrice = fila.insertCell(3);
+
+        celdaName.textContent = cart[i].name;
+        insertPrice.textContent = cart[i].price;
+        insertAmount.textContent = cart[i].amount;
+        insertTotalPrice.textContent = cart[i].amount * cart[i].price;
+    }
+    var total = calculateTotal();
+    var totalPrice = document.getElementById("total_price");
+    totalPrice.textContent = total;
+    console.log(total);
+
+    var discount = applyPromotionsCart()
+    var totalDiscount = document.getElementById("total_discount");
+    totalDiscount.textContent = discount.toFixed(2);
+    console.log(discount);
+
+    var FinalPrice = document.getElementById("final_price");
+    FinalPrice.textContent = total - discount;
+    console.log(FinalPrice);
+
+    
     // Fill the shopping cart modal manipulating the shopping cart dom
 }
 
