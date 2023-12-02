@@ -2202,6 +2202,25 @@ progress {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+/* anadimos un estilo en caso que el campo del formulario sea incorrecto */
+.form-control.error{
+  color: #212529;
+  background-color: #ffe7e7;
+  border-color: #ffa8a8;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(253 13 13 / 25%);
+}
+
+/* anadimos un estilo en caso que el campo del formulario sea correcto */
+.form-control.right {
+  color: #212529;
+  background-color: #dafde8;
+  border-color: #b9ffc1;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgb(36 255 134 / 25%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -2220,6 +2239,7 @@ progress {
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
+
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;
 }
@@ -2403,6 +2423,8 @@ textarea.form-control-lg {
   height: 1.5em;
   border-radius: 0.25rem;
 }
+
+
 
 .form-select {
   display: block;
@@ -2904,6 +2926,14 @@ textarea.form-control-lg {
 
 .invalid-feedback {
   display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
+
+.invalid-feedback.error {
+  display: block;
   width: 100%;
   margin-top: 0.25rem;
   font-size: 0.875em;
