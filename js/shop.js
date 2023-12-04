@@ -100,7 +100,7 @@ function buy(id) {
 function cleanCart() {
     cart = [];
     console.log(cart)
-    printCart() 
+    printCart()
 }
 
 // Exercise 3
@@ -120,7 +120,7 @@ function calculateTotal() {
 
 function applyPromotionsCart(totalPrice) {
     let promoDiscounts = 0;
-    let subtotalWithDiscount = 0;
+    //let subtotalWithDiscount = 0;
     var IndexPromoProducts = [];
 
     IndexPromoProducts = cart.reduce((acumulador, producto, indice) => {
@@ -136,10 +136,10 @@ function applyPromotionsCart(totalPrice) {
         }
     }
 
-    subtotalWithDiscount = totalPrice - promoDiscounts;
-    let roundedPrice = subtotalWithDiscount.toFixed(2);
-    console.log("Discounted Price", roundedPrice)
-
+    // subtotalWithDiscount = totalPrice - promoDiscounts;
+    // let roundedPrice = subtotalWithDiscount.toFixed(2);
+    // console.log("Discounted Price", roundedPrice)
+    console.log("descuento", promoDiscounts.toFixed(2))
     return promoDiscounts;
 }
 // Apply promotions to each item in the array "cart"
@@ -147,39 +147,63 @@ function applyPromotionsCart(totalPrice) {
 
 // Exercise 5
 function printCart() {
-    
+
     var table = document.getElementById("ShoppingCartTable");
     var tbody = table.getElementsByTagName('tbody')[0];
 
     tbody.innerHTML = ''; //limpiamos filas existentes ara evitar duplicados.
-    
+
     for (let i = 0; i < cart.length; i++) {
         var fila = tbody.insertRow();
         var celdaName = fila.insertCell();
         var insertPrice = fila.insertCell(1);
         var insertAmount = fila.insertCell(2);
-        var insertTotalPrice = fila.insertCell(3);
+        var modifyAmount = fila.insertCell(3);
+        var insertTotalPrice = fila.insertCell(4);
 
         celdaName.textContent = cart[i].name;
         insertPrice.textContent = cart[i].price;
         insertAmount.textContent = cart[i].amount;
+
+        // Crear botones de "+" y "-"
+        var addButton = document.createElement('button');
+        addButton.textContent = '+';
+        addButton.addEventListener('click', function () {
+            // Llama a la función para incrementar la cantidad
+            buy(cart[i].id);
+            printCart();
+        });
+
+        var minusButton = document.createElement('button');
+        minusButton.textContent = '-';
+        minusButton.addEventListener('click', function () {
+            // Llama a la función para decrementar la cantidad
+            removeFromCart(cart[i].id);
+            printCart();
+        });
+
+        // Agrega los botones a la celda modifyAmount
+        modifyAmount.appendChild(minusButton);
+        modifyAmount.appendChild(addButton);
+
         insertTotalPrice.textContent = cart[i].amount * cart[i].price;
     }
+
     var total = calculateTotal();
     var totalPrice = document.getElementById("total_price");
     totalPrice.textContent = total;
-    console.log(total);
+    //console.log(total);
 
     var discount = applyPromotionsCart()
     var totalDiscount = document.getElementById("total_discount");
     totalDiscount.textContent = discount.toFixed(2);
-    console.log(discount);
+    //console.log(discount);
 
     var FinalPrice = document.getElementById("final_price");
     FinalPrice.textContent = total - discount;
-    console.log(FinalPrice);
+    //console.log(FinalPrice);
 
-    
+
     // Fill the shopping cart modal manipulating the shopping cart dom
 }
 
@@ -188,6 +212,21 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+
+    let i = id - 1;
+
+    if (cart.includes(products[i])) {
+        if (products[i].amount > 1) {
+            products[i].amount -= 1;
+        } else {
+            cart.splice(i, 1);
+        }
+           
+    }
+
+    //console.log(products[id]);
+    console.log(cart)
+    calculateTotal()
 
 }
 
