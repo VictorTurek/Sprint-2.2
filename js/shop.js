@@ -91,6 +91,7 @@ function buy(id) {
     //console.log(products[id]);
     console.log(cart)
     calculateTotal()
+    amountCountUpdate()
 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
@@ -101,6 +102,8 @@ function cleanCart() {
     cart = [];
     console.log(cart)
     printCart()
+    amountCountUpdate()
+
 }
 
 // Exercise 3
@@ -168,6 +171,7 @@ function printCart() {
         // Crear botones de "+" y "-"
         var addButton = document.createElement('button');
         addButton.textContent = '+';
+        addButton.classList.add('button-add'); // Agrega la clase del botón de suma
         addButton.addEventListener('click', function () {
             // Llama a la función para incrementar la cantidad
             buy(cart[i].id);
@@ -176,6 +180,7 @@ function printCart() {
 
         var minusButton = document.createElement('button');
         minusButton.textContent = '-';
+        minusButton.classList.add('button-minus'); // Agrega la clase del botón de resta
         minusButton.addEventListener('click', function () {
             // Llama a la función para decrementar la cantidad
             removeFromCart(cart[i].id);
@@ -221,15 +226,42 @@ function removeFromCart(id) {
         } else {
             cart.splice(i, 1);
         }
-           
+
     }
 
     //console.log(products[id]);
     console.log(cart)
     calculateTotal()
+    amountCountUpdate()
 
 }
 
 function open_modal() {
     printCart();
 }
+
+
+// Extra. cambiar el numero que aparece en el carrito.
+
+function amountCount() {
+    let totalAmount = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        totalAmount += cart[i].amount
+    }
+    console.log(totalAmount);
+    return totalAmount;
+}
+
+// Función para actualizar el contenido del elemento con id "count_product"
+function amountCountUpdate() {
+    var elementoCount = document.getElementById("count_product");
+
+    // Llama a la función para obtener la cantidad de productos
+    var cantidadProductos = amountCount();
+
+    // Actualiza el contenido del elemento con la nueva cantidad
+    elementoCount.textContent = cantidadProductos;
+}
+//Falta llamar a la funcion.
+//amountCountUpdate();

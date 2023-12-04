@@ -11317,3 +11317,30 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+/* Estilos para el botón de suma */
+.button-add {
+ width: 30px;
+ height: 30px;
+ font-weight: bold;
+ border-radius: 9px;
+}
+.button-add:hover {
+
+  background-color: #deffde;
+   }
+
+/* Estilos para el botón de resta */
+.button-minus {
+  margin-right: 5px;
+
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 9px;
+}
+.button-minus:hover {
+
+  background-color: #ffe2e2;
+
+}
