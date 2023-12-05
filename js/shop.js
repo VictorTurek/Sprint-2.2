@@ -135,7 +135,7 @@ function applyPromotionsCart(totalPrice) {
 
     for (let i = 0; i < IndexPromoProducts.length; i++) {
         if (cart[IndexPromoProducts[i]].amount >= cart[IndexPromoProducts[i]].offer.number) {
-            promoDiscounts = cart[IndexPromoProducts[i]].price * cart[IndexPromoProducts[i]].amount * (cart[IndexPromoProducts[i]].offer.percent / 100);
+            promoDiscounts += cart[IndexPromoProducts[i]].price * cart[IndexPromoProducts[i]].amount * (cart[IndexPromoProducts[i]].offer.percent / 100);
         }
     }
 
